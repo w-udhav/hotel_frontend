@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CancellationIcon, CloseIcon } from "../Components/Icons";
-import { Link, useLocation } from "react-router-dom";
+import { CancellationIcon } from "../Components/Icons";
+import { useLocation } from "react-router-dom";
 
 export default function CancelTemp({ children }) {
   const route = useLocation().pathname.split("/");

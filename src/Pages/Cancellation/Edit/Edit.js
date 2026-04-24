@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import avatar from "../../../Assets/avatar.png";
 import { useNavigate } from "react-router";
 import { useParams, useLocation } from "react-router-dom";
-// use cors
-import cors from "cors";
-import axios from "axios";
 import { BASE_URL } from "../../../constants";
-
-cors();
 
 export default function Edit() {
   const navigate = useNavigate();
@@ -15,8 +10,8 @@ export default function Edit() {
   const locaiton = useLocation();
   const [data, setData] = useState(locaiton.state?.data);
 
-  const [loading1, setLoading1] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  const [, setLoading1] = useState(false);
+  const [, setLoading2] = useState(false);
 
   console.log(data);
 

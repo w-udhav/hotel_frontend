@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { CancelIcon2, EditIcon } from "../../Components/Icons";
 import { Link } from "react-router-dom";
 import Loader from "../../Assets/Lotties/Loader.json";

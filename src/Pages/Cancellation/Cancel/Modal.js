@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { CloseIcon } from "../../../Components/Icons";
+import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 

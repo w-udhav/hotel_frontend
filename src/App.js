@@ -1,6 +1,5 @@
-import { Route, Routes, Navigate, Link, useLocation } from "react-router-dom";
+import { Route, Routes, Navigate, Link } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Cancellation from "./Pages/Cancellation/Cancellation";
 import BookIcon, {
   ArrowRight,
   CancelIcon,
@@ -13,7 +12,6 @@ import CancelRoutes from "./Routes/CancelRoutes";
 import { useState } from "react";
 
 function App() {
-  const route = useLocation().pathname;
   const [newIndex, setIndex] = useState(0);
   const links = [
     {

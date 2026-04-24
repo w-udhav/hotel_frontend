@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Lottie from "lottie-react";
 import Bg from "../Assets/Lotties/Bg.json";
 import BookNow from "../Pages/Booking/BookNow";
 import { motion } from "framer-motion";
 
 export default function BookingTemp({ children }) {
-  const [isSelected, setIsSelected] = useState(true);
-  const handleChange = () => {
-    setIsSelected(!isSelected);
-  };
   return (
     <motion.div
       initial={{ opacity: 0 }}

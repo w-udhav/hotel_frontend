@@ -7,13 +7,11 @@ import { BASE_URL } from "../../../constants";
 
 export default function Cancel() {
   const [isOpen, setIsOpen] = useState(false);
-  const [loading1, setLoading1] = useState(false);
-  const [loading2, setLoading2] = useState(false);
   const [refund, setRefund] = useState(0);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [data, setData] = useState(location.state?.data);
+  const [data] = useState(location.state?.data);
 
   const { id } = useParams();
 
@@ -53,7 +51,7 @@ export default function Cancel() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className="w-full h-full">

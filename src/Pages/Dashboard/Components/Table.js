@@ -46,6 +46,7 @@ export default function Table({ selected }) {
       setData(filterData);
       console.log(filterData);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   const headings = [

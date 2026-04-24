@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import bg from "../../Assets/bg.jpg";
 import Modal from "./Modal";
 import { CloseIcon, CubeIcon } from "../../Components/Icons";
 import { BASE_URL } from "../../constants";

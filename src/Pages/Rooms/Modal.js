@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CloseIcon } from "../../Components/Icons";
 import { motion } from "framer-motion";
 import { BASE_URL } from "../../constants";
 
