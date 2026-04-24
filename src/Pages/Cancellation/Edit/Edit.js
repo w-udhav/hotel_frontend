@@ -5,6 +5,7 @@ import { useParams, useLocation } from "react-router-dom";
 // use cors
 import cors from "cors";
 import axios from "axios";
+import { BASE_URL } from "../../../constants";
 
 cors();
 
@@ -65,7 +66,7 @@ export default function Edit() {
 
     // send a post request to localhost:5000/api/bookings/create
     // with data as body
-    fetch(`http://localhost:5000/api/bookings/update/${id}`, {
+    fetch(`${BASE_URL}/api/bookings/update/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

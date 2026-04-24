@@ -3,6 +3,7 @@ import avatar from "../../../Assets/avatar.png";
 import Modal from "./Modal";
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { BASE_URL } from "../../../constants";
 
 export default function Cancel() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +22,10 @@ export default function Cancel() {
   };
 
   const getRefund = () => {
-    fetch(`http://localhost:5000/api/bookings/delete/${id}`, {
+    fetch(`${BASE_URL}/api/bookings/delete/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // xFormUrlEncoded: "true",
       },
     }).then((res) => {
       res.json().then((item) => {
@@ -33,21 +33,20 @@ export default function Cancel() {
         setIsOpen(false);
         navigate("/checkout");
       });
-    });
+    }).catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/bookings/getRefundAmount/${id}`, {
+    fetch(`${BASE_URL}/api/bookings/getRefundAmount/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // xFormUrlEncoded: "true",
       },
     })
       .then((res) => {
         res.json().then((item) => {
           console.log(item);
-          setRefund(item.Refund);
+          setRefund(item?.Refund ?? 0);
           console.log(id);
         });
       })
@@ -99,11 +98,11 @@ export default function Cancel() {
                 <h2 className="font-medium text-lg pb-1"> Checks </h2>
                 <div className="flex items-center gap-3">
                   <h3 className="text-gray-500 w-14"> From: </h3>
-                  <p> {data?.checkInTime.replace(/\//g, "-")} </p>
+                  <p> {data?.checkInTime?.replace(/\//g, "-") ?? "N/A"} </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <h3 className="text-gray-500 w-14 "> To: </h3>
-                  <p> {data?.checkOutTime.replace(/\//g, "-")} </p>
+                  <p> {data?.checkOutTime?.replace(/\//g, "-") ?? "N/A"} </p>
                 </div>
               </div>
             </div>

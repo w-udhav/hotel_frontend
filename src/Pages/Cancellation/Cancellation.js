@@ -4,6 +4,7 @@ import { CancelIcon2, EditIcon } from "../../Components/Icons";
 import { Link } from "react-router-dom";
 import Loader from "../../Assets/Lotties/Loader.json";
 import Lottie from "lottie-react";
+import { BASE_URL } from "../../constants";
 
 export default function Cancellation() {
 
@@ -12,9 +13,12 @@ export default function Cancellation() {
 
   const fetchData = async () => {
     setLoading(true);
-    const response = await fetch("http://localhost:5000/api/bookings/all");
+    try {
+    const response = await fetch(`${BASE_URL}/api/bookings/all`);
 
     var dataLocal = await response.json();
+
+    if (!dataLocal?.filtered_bookings) { setLoading(false); return; }
 
     // change checkInTime and checkOutTime from unix to date and time
     dataLocal.filtered_bookings.forEach((item) => {
@@ -35,6 +39,7 @@ export default function Cancellation() {
     });
     setData(dataLocal.filtered_bookings);
     setLoading(false);
+    } catch (e) { console.error(e); setLoading(false); }
   };
   // use effect
   React.useEffect(() => {
@@ -99,10 +104,10 @@ export default function Cancellation() {
           </tr>
         ) : (
           data.map((item) => {
-            if(item.status === "not checked in") {
+            if(!item || item.status !== "not checked in") return null;
             return (
               <tr className="border-b" key={item._id}>
-                <td className="py-2 px-4">{item.roomID.roomType}</td>
+                <td className="py-2 px-4">{item.roomID?.roomType ?? "N/A"}</td>
                 <td className="py-2 px-4">{item.userName}</td>
                 <td className="py-2 px-4">{item.checkInTime}</td>
                 <td className="py-2 px-4">{item.checkOutTime}</td>
@@ -128,7 +133,6 @@ export default function Cancellation() {
             </td>
               </tr>
             );
-            }
           })
         )}
 

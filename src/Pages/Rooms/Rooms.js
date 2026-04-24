@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import bg from "../../Assets/bg.jpg";
 import Modal from "./Modal";
 import { CloseIcon, CubeIcon } from "../../Components/Icons";
+import { BASE_URL } from "../../constants";
 import { AnimatePresence, motion } from "framer-motion";
 import A from "../../Assets/Rooms/A.png";
 import B from "../../Assets/Rooms/B.jpeg";
@@ -17,9 +18,11 @@ export default function Rooms() {
   };
 
   const getAllRooms = async () => {
-    const res = await fetch("http://localhost:5000/api/rooms/all");
+    try {
+    const res = await fetch(`${BASE_URL}/api/rooms/all`);
     const data = await res.json();
-    setRooms(data.rooms);
+    setRooms(data.rooms || []);
+    } catch (e) { console.error(e); }
   };
 
   useEffect(() => {
@@ -55,8 +58,9 @@ export default function Rooms() {
 
       <div className="flex flex-col justify-center items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 pb-3 overflow-auto">
         {rooms.map((room) => {
+          if (!room) return null;
           return (
-            <div className="min-w-[15rem] max-w-[16rem] min-h-[12rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
+            <div key={room._id || room.roomNumber} className="min-w-[15rem] max-w-[16rem] min-h-[12rem] relative shadow-md hover:shadow-xl transition-all ease-linear rounded-2xl flex flex-col overflow-hidden bg-white">
               <div className="h-24 w-full">
                 <img
                   src={
